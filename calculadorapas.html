@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Calculadora de Argumento Final</h2>
+
+<form id="myForm">
+  <label for="lingua">Língua:</label><br>
+  <select id="lingua" name="lingua">
+    <option value="inglês">Inglês</option>
+    <option value="francês">Francês</option>
+    <option value="espanhol">Espanhol</option>
+  </select><br>
+  <label for="parte1_1">Nota parte línguas do pas 1:</label><br>
+  <input type="number" id="parte1_1" name="parte1_1"><br>
+  <label for="parte2_1">Nota parte2 do pas 1:</label><br>
+  <input type="number" id="parte2_1" name="parte2_1"><br>
+  <label for="tipod_1">Nota questão tipo D do pas 1:</label><br>
+  <input type="number" id="tipod_1" name="tipod_1"><br>
+  <label for="redacao_1">Nota Redação do pas 1:</label><br>
+  <input type="number" id="redacao_1" name="redacao_1"><br>
+  <label for="parte1_2">Nota línguas do pas 2:</label><br>
+  <input type="number" id="parte1_2" name="parte1_2"><br>
+  <label for="parte2_2">Nota parte2 do pas 2:</label><br>
+  <input type="number" id="parte2_2" name="parte2_2"><br>
+  <label for="tipod_2">Nota questão tipo D do pas 2:</label><br>
+  <input type="number" id="tipod_2" name="tipod_2"><br>
+  <label for="redacao_2">Nota Redação do pas 2:</label><br>
+  <input type="number" id="redacao_2" name="redacao_2"><br>
+  <label for="parte1_3">Nota línguas do pas 3:</label><br>
+  <input type="number" id="parte1_3" name="parte1_3"><br>
+  <label for="parte2_3">Nota parte2 do pas 3:</label><br>
+  <input type="number" id="parte2_3" name="parte2_3"><br>
+  <label for="tipod_3">Nota questão tipo D do pas 3:</label><br>
+  <input type="number" id="tipod_3" name="tipod_3"><br>
+  <label for="redacao_3">Nota Redação do pas 3:</label><br>
+  <input type="number" id="redacao_3" name="redacao_3"><br>
+  <input type="button" value="Calcular" onclick="calcular()">
+</form>
+
+<p id="resultado"></p>
+
+<script>
+function mudar_valor(lingua, dp1_1, dp1_2, dp1_3, m1_1, m1_2, m1_3) {
+    switch (lingua) {
+        case "inglês":
+            dp1_1 = 2.228;
+            dp1_2 = 1.871;
+            dp1_3 = 1.795;
+            m1_1 = 1.843;
+            m1_2 = 2.682;
+            m1_3 = 3.589;
+            break;
+        case "francês":
+            dp1_1 = 2.438;
+            dp1_2 = 1.894;
+            dp1_3 = 1.965;
+            m1_1 = 4.805;
+            m1_2 = 6.354;
+            m1_3 = 3.928;
+            break;
+        case "espanhol":
+            dp1_1 = 2.581;
+            dp1_2 = 2.223;
+            dp1_3 = 1.846;
+            m1_1 = 3.745;
+            m1_2 = 4.501;
+            m1_3 = 2.832;
+            break;
+        default:
+            alert("idioma inválido");
+    }
+    return [dp1_1, dp1_2, dp1_3, m1_1, m1_2, m1_3];
+}
+
+function calcular() {
+    let lingua = document.getElementById("lingua").value.toLowerCase();
+    let parte1_1 = parseFloat(document.getElementById("parte1_1").value);
+    let parte2_1 = parseFloat(document.getElementById("parte2_1").value);
+    let tipod_1 = parseFloat(document.getElementById("tipod_1").value);
+    let redacao_1 = parseFloat(document.getElementById("redacao_1").value);
+    let parte1_2 = parseFloat(document.getElementById("parte1_2").value);
+    let parte2_2 = parseFloat(document.getElementById("parte2_2").value);
+    let tipod_2 = parseFloat(document.getElementById("tipod_2").value);
+    let redacao_2 = parseFloat(document.getElementById("redacao_2").value);
+    let parte1_3 = parseFloat(document.getElementById("parte1_3").value);
+    let parte2_3 = parseFloat(document.getElementById("parte2_3").value);
+    let tipod_3 = parseFloat(document.getElementById("tipod_3").value);
+    let redacao_3 = parseFloat(document.getElementById("redacao_3").value);
+
+    let parte2_somada_1 = parte2_1 + tipod_1;
+    let parte2_somada_2 = parte2_2 + tipod_2;
+    let parte2_somada_3 = parte2_3 + tipod_3;
+
+    let dp1_1 = 0;
+    let dp2_1 = 13.344;
+    let dpr_1 = 2.637;
+    let dp1_2 = 0;
+    let dp2_2 = 11.897;
+    let dpr_2 = 1.848;
+    let dp1_3 = 0;
+    let dp2_3 = 13.126;
+    let dpr_3 = 1.760;
+    let m1_1 = 0;
+    let m2_1 = 24.520;
+    let mr_1 = 5.720;
+    let m1_2 = 0;
+    let m2_2 = 25.083;
+    let mr_2 = 7.090;
+    let m1_3 = 0;
+    let m2_3 = 26.065;
+    let mr_3 = 7.456;
+
+    [dp1_1, dp1_2, dp1_3, m1_1, m1_2, m1_3] = mudar_valor(lingua, dp1_1, dp1_2, dp1_3, m1_1, m1_2, m1_3);
+
+    let argpt1_1 = ((parte1_1 - m1_1)/dp1_1)*0.72;
+    let argpt2_1 = ((parte2_somada_1 - m2_1)/dp2_1)*8.28;
+    let argred_1 = ((redacao_1 - mr_1)/dpr_1);
+    let argpt1_2 = ((parte1_2 - m1_2)/dp1_2)*0.72;
+    let argpt2_2 = ((parte2_somada_2 - m2_2)/dp2_2)*8.28;
+    let argred_2 = ((redacao_2 - mr_2)/dpr_2);
+    let argpt1_3 = ((parte1_3 - m1_3)/dp1_3)*0.72;
+    let argpt2_3 = ((parte2_somada_3 - m2_3)/dp2_3)*8.28;
+    let argred_3 = ((redacao_3 - mr_3)/dpr_3);
+
+    let argumento_pas1 = argpt1_1 + argpt2_1 + argred_1;
+    let argumento_pas2 = argpt1_2 + argpt2_2 + argred_2;
+    let argumento_pas3 = argpt1_3 + argpt2_3 + argred_3;
+
+    let argumento_final = argumento_pas1 + (argumento_pas2*2);
+
+    document.getElementById("resultado").innerHTML = "Seu argumento final é: " + argumento_final;
+}
+</script>
+
+</body>
+</html>
